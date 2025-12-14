@@ -1,24 +1,40 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void GetMatrix( int rawPtr[] , int *rows , int *cols ) {
-    int r , c ;
-    scanf( "%d %d" , &r , &c ) ;
+void GetMatrix(int **matrix, int *rows, int *cols) {
+    scanf("%d %d", rows, cols);
 
-    int total = r * c ;
-    int *matrixBox = malloc( total * sizeof( int) ) ;
+    int total = (*rows) * (*cols);
+    *matrix = malloc(total * sizeof(int));
 
-    for( int i = 0 ; i < total ; i++ ) {
-        scanf( "%d" , &matrixBox[i] ) ;
+    if (*matrix == NULL) {
+        printf("Memory allocation failed\n");
+        exit(1);
     }
 
-    *( ( int ** ) rawPtr ) = matrixBox ;
-    *rows = r ;
-    *cols = c ;
+    for (int i = 0; i < total; i++) {
+        scanf("%d", &(*matrix)[i]);
+    }
+}
+
+void PrintMatrix(int *matrix, int rows, int cols) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            printf("%d ", matrix[i * cols + j]);
+        }
+        printf("\n");
+    }
 }
 
 int main() {
-    int *data , m , n ;
-    GetMatrix( ( int * )&data , &m , &n ) ;
-    return 0 ;
+    int *data;
+    int m, n;
+
+    GetMatrix(&data, &m, &n);
+
+    printf("Matrix (%d x %d):\n", m, n);
+    PrintMatrix(data, m, n);
+
+    free(data);
+    return 0;
 }
