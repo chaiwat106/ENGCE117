@@ -1,0 +1,48 @@
+#include <stdio.h>
+
+struct student {
+    char name[ 20 ] ;
+    int age ;
+    char sex ;
+    float gpa ;
+} ;
+
+
+void GetStudent( struct student child[][ 10 ] , int *room ) ;
+
+int main() {
+    struct student children[ 20 ][ 10 ] ; 
+    int group ;
+
+    GetStudent( children , &group ) ;
+  
+    if( group > 0 ) {
+        printf( "\n--- First Student in Room 1 ---\n" ) ;
+        printf( "Name: %s , GPA: %.2f\n" , children[0][0].name , children[0][0].gpa ) ;
+    }
+
+    return 0 ;
+}
+
+
+void GetStudent( struct student child[][ 10 ] , int *room ) {
+    printf( "Enter number of rooms: " ) ;
+    scanf( "%d" , room ) ; 
+
+    for( int i = 0 ; i < *room; i++ ) {
+        printf( "\n--- Room %d ---\n" , i + 1 ) ;
+        for( int j = 0 ; j < 10 ; j++ ) {
+            printf( "Student %d Name: ", j + 1 ) ;
+            scanf( "%s" , child[i][j].name ) ;
+            
+            printf( "Student %d Age: " , j + 1 ) ;
+            scanf( "%d" , &child[i][j].age ) ;
+            
+            printf( "Student %d Sex (M/F) : ", j + 1 ) ;
+            scanf( " %c" , &child[i][j].sex ) ; 
+            
+            printf( "Student %d GPA : ", j + 1 ) ;
+            scanf( "%f", &child[i][j].gpa ) ;
+        }
+    }
+}
