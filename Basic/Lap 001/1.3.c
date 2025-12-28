@@ -3,7 +3,7 @@
 int main() {
     int score ;
 
- 
+        printf( "Enter your score: " ) ;
     if ( scanf( "%d" , &score) != 1 ) {
         return 1 ;
     }
